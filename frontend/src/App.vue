@@ -1,26 +1,50 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <!-- Header -->
+    <header>
+      <div>
+        <h1>Super Todo</h1>
+        <p>
+          Current Plan: 
+          <select v-model="userRole">
+            <option value="free">Free</option>
+            <option value="paid">Premium</option>
+          </select>
+        </p>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <TodoList :user-role="userRole" />
+    </main>
+  </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script lang="ts">
+import { defineComponent, ref, onMounted } from 'vue';
+import TodoList from './components/TodoList.vue';
+import { UserRole } from './types/todo';
 
-export default {
+export default defineComponent({
   name: 'App',
   components: {
-    HelloWorld
-  }
-}
-</script>
+    TodoList,
+  },
+  setup() {
+    const userRole = ref<UserRole>('free');
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+    onMounted(() => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const role = urlParams.get('userRole');
+      if (role === 'paid') {
+        userRole.value = role;
+      } else {
+        userRole.value = 'free';
+      }
+    });
+
+    return { userRole };
+  },
+});
+</script>
