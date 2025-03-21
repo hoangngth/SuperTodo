@@ -109,7 +109,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted, PropType } from 'vue';
+import { defineComponent, ref, onMounted, type PropType } from 'vue';
 import type { Todo, UserRole } from '../types/todo';
 
 interface NewTodo {
