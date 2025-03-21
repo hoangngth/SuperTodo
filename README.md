@@ -61,7 +61,6 @@ open https://super-todo-wine.vercel.app
 
 ### Frontend Implementation
 - Vue 3 Composition API
-- TypeScript for type safety
 - Vite for development and building
 - Environment variables for API configuration
 - Colocated component tests
