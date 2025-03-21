@@ -52,6 +52,20 @@ open https://super-todo-wine.vercel.app
 - **Testing:** Vitest
 - **Environment:** Vite
 
+## Technical Details
+
+### Backend Implementation
+- Uses in-memory array for todo storage
+- Implements permission-based feature gating
+- Colocated tests with source files
+
+### Frontend Implementation
+- Vue 3 Composition API
+- TypeScript for type safety
+- Vite for development and building
+- Environment variables for API configuration
+- Colocated component tests
+
 ## Project Structure
 
 ```plaintext
@@ -153,17 +167,3 @@ cd frontend
 npm run test
 npm run test:cov
 ```
-
-## Technical Details
-
-### Backend Implementation
-- Uses in-memory array for todo storage
-- Implements permission-based feature gating
-- Colocated tests with source files
-
-### Frontend Implementation
-- Vue 3 Composition API
-- TypeScript for type safety
-- Vite for development and building
-- Environment variables for API configuration
-- Colocated component tests
