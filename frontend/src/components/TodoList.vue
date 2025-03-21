@@ -132,11 +132,10 @@ export default defineComponent({
       notes: '',
     });
     const url = import.meta.env.VITE_SUPER_TODO_API_URL;
-    console.log("dsadasdsa", import.meta.env.VITE_SUPER_TODO_API_URL)
 
     const fetchTodos = async () => {
       try {
-        const response = await fetch(`${url}?userRole=${props.userRole}`);
+        const response = await fetch(`${url}/todo?userRole=${props.userRole}`);
         todos.value = await response.json();
       } catch (error) {
         console.error('Failed to fetch todos:', error);
@@ -145,7 +144,7 @@ export default defineComponent({
 
     const createTodo = async () => {
       try {
-        const response = await fetch(`${url}?userRole=${props.userRole}`, {
+        const response = await fetch(`${url}/todo?userRole=${props.userRole}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -170,7 +169,7 @@ export default defineComponent({
       const todo = todos.value.find(t => t.id === todoId);
       if (todo) {
         try {
-          await fetch(`${url}/${todoId}?userRole=${props.userRole}`, {
+          await fetch(`${url}/todo/${todoId}?userRole=${props.userRole}`, {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json',
@@ -186,7 +185,7 @@ export default defineComponent({
 
     const updateNotes = async (todoId: string, notes: string) => {
       try {
-        await fetch(`${url}/${todoId}?userRole=${props.userRole}`, {
+        await fetch(`${url}/todo/${todoId}?userRole=${props.userRole}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -201,7 +200,7 @@ export default defineComponent({
 
     const deleteTodo = async (todoId: string) => {
       try {
-        await fetch(`${url}/${todoId}`, {
+        await fetch(`${url}/todo/${todoId}`, {
           method: 'DELETE',
         });
         await fetchTodos();
