@@ -89,7 +89,7 @@
                 Created: {{ new Date(todo.createdAt).toLocaleDateString() }}
               </div>
               
-              <div v-if="userRole === 'paid'" class="space-y-2">
+              <div class="space-y-2">
                 <label class="block text-sm font-medium text-gray-700">Notes</label>
                 <textarea
                   v-model="todo.notes"
@@ -131,7 +131,8 @@ export default defineComponent({
       title: '',
       notes: '',
     });
-    const url = "http://localhost:3000/todo";
+    const url = import.meta.env.VITE_SUPER_TODO_API_URL;
+    console.log("dsadasdsa", import.meta.env.VITE_SUPER_TODO_API_URL)
 
     const fetchTodos = async () => {
       try {
@@ -144,7 +145,6 @@ export default defineComponent({
 
     const createTodo = async () => {
       try {
-        console.log(JSON.stringify(newTodo.value));
         const response = await fetch(`${url}?userRole=${props.userRole}`, {
           method: 'POST',
           headers: {
