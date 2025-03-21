@@ -7,12 +7,12 @@ describe('TodoList.vue', () => {
 
   beforeEach(() => {
     // Mock fetch API
-    global.fetch = vi.fn(() =>
+    window.fetch = vi.fn(() =>
       Promise.resolve({
         ok: true,
         json: () => Promise.resolve([])
       })
-    );
+    ) as unknown as typeof fetch;
   });
 
   it('renders todo form with title input', () => {
@@ -41,7 +41,7 @@ describe('TodoList.vue', () => {
       ok: true,
       json: () => Promise.resolve({ id: '1', title: 'Test Todo' })
     });
-    global.fetch = mockFetch;
+    window.fetch = mockFetch as unknown as typeof fetch;
 
     wrapper = mount(TodoList, {
       props: { userRole: 'free' }

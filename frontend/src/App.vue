@@ -24,7 +24,7 @@
 <script lang="ts">
 import { defineComponent, ref, onMounted } from 'vue';
 import TodoList from './components/TodoList.vue';
-import { UserRole } from './types/todo';
+import type { UserRole } from './types/todo';
 
 export default defineComponent({
   name: 'App',
