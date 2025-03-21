@@ -15,8 +15,8 @@ A simple todo application with free and premium plan features built using NestJS
 - 🌟 View and edit notes
 
 ## Live Demo
-- Frontend: [https://super-todo-wine.vercel.app](https://super-todo-wine.vercel.app)
-- Backend: [https://super-todo-wine.vercel.app](https://super-todo-wine.vercel.app)
+- Frontend: [https://super-todo-alpha.vercel.app](https://super-todo-alpha.vercel.app)
+- Backend: [https://super-todo-alpha.vercel.app](https://super-todo-alpha.vercel.app)
 
 ## API Endpoints
 
@@ -31,10 +31,10 @@ A simple todo application with free and premium plan features built using NestJS
 
 ```bash
 # Test the production API
-curl https://super-todo-wine.vercel.app/todo?userRole=paid
+curl https://super-todo-alpha.vercel.app/todo?userRole=paid
 
 # Visit the live frontend
-open https://super-todo-wine.vercel.app
+open https://super-todo-alpha.vercel.app
 ```
 
 ## Tech Stack
