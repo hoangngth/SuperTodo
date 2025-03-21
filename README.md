@@ -14,18 +14,43 @@ A simple todo application with free and premium plan features built using NestJS
 - 🌟 Add notes to todos
 - 🌟 View and edit notes
 
+## Live Demo
+- Frontend: [https://super-todo-wine.vercel.app](https://super-todo-wine.vercel.app)
+- Backend: [https://super-todo-wine.vercel.app](https://super-todo-wine.vercel.app)
+
+## API Endpoints
+
+| Method | Endpoint | Description | Query Parameter |
+|--------|----------|-------------|----------------|
+| GET    | `/todo`  | Get todos   | `userRole`     |
+| POST   | `/todo`  | Create todo | `userRole`     |
+| PATCH  | `/todo/:id` | Update todo | `userRole`   |
+| DELETE | `/todo/:id` | Delete todo | -            |
+
+### Testing Production Build
+
+```bash
+# Test the production API
+curl https://super-todo-wine.vercel.app/todo?userRole=paid
+
+# Visit the live frontend
+open https://super-todo-wine.vercel.app
+```
+
 ## Tech Stack
 
 ### Backend
 - **Framework:** NestJS
 - **Language:** TypeScript
 - **Testing:** Jest
+- **Storage:** In-memory array
 
 ### Frontend
 - **Framework:** Vue.js
-- **Styling:** TailwindCss
+- **Styling:** TailwindCSS
 - **Language:** TypeScript
 - **Testing:** Vitest
+- **Environment:** Vite
 
 ## Project Structure
 
@@ -37,91 +62,108 @@ SuperTodo/
 │   │   │   └── exceptions/
 │   │   │       └── permission.exception.ts
 │   │   ├── todo/
+│   │   │   ├── __tests__/
+│   │   │   │   ├── todo.controller.spec.ts
+│   │   │   │   └── todo.service.spec.ts
 │   │   │   ├── dto/
+│   │   │   │   ├── create-todo.dto.ts
+│   │   │   │   └── update-todo.dto.ts
 │   │   │   ├── entities/
+│   │   │   │   └── todo.entity.ts
 │   │   │   ├── todo.controller.ts
-│   │   │   └── todo.service.ts
+│   │   │   ├── todo.service.ts
+│   │   │   └── todo.module.ts
 │   │   ├── app.module.ts
 │   │   └── main.ts
 │   └── test/
 └── frontend/
     ├── src/
     │   ├── components/
+    │   │   ├── __tests__/
+    │   │   │   └── TodoList.spec.ts
     │   │   └── TodoList.vue
+    │   ├── __tests__/
+    │   │   └── App.spec.ts
     │   ├── types/
+    │   │   └── todo.ts
     │   ├── App.vue
-    │   └── main.ts
-    └── tests/
+    │   ├── main.ts
+    │   └── vite-env.d.ts
+    ├── .env
+    └── .env.production
 ```
 
-## Getting Started
+## Setup Instructions
 
 ### Prerequisites
-
 - Node.js (v16 or higher)
 - npm (v8 or higher)
+
+### Environment Setup
+
+Backend (.env):
+```properties
+PORT=3000
+HOST=localhost
+```
+
+Frontend (.env):
+```properties
+VITE_SUPER_TODO_API_URL=http://localhost:3000/
+```
 
 ### Installation
 
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/SuperTodo.git
-cd SuperTodo
-
 # Install backend dependencies
 cd backend
 npm install
 
 # Install frontend dependencies
-cd ../frontend
+cd frontend
 npm install
 ```
 
-### Running the Application
+### Development
 
 ```bash
-# Start backend (from backend directory)
+# Start backend
 cd backend
 npm run start:dev
 
-# In a new terminal, start frontend
+# Start frontend (new terminal)
 cd frontend
 npm run dev
 ```
 
-Access the application:
-- Frontend: [http://localhost:5173](http://localhost:5173)
-- Backend API: [http://localhost:3000](http://localhost:3000)
+Access:
+- Frontend: http://localhost:5173
+- Backend: http://localhost:3000
 
 ### Testing
 
 ```bash
 # Backend tests
 cd backend
-npm run test        # Run unit tests
-npm run test:cov    # Run tests with coverage
-npm run test:e2e    # Run end-to-end tests
+npm run test
+npm run test:cov
 
 # Frontend tests
 cd frontend
-npm run test:unit
+npm run test
+npm run test:cov
 ```
 
-## API Endpoints
+## Technical Details
 
-| Method | Endpoint      | Description      | Query Parameter |
-|--------|--------------|------------------|----------------|
-| GET    | `/todos`     | Get all todos    | `userRole`     |
-| GET    | `/todos/:id` | Get single todo  | `userRole`     |
-| POST   | `/todos`     | Create todo      | `userRole`     |
-| PATCH  | `/todos/:id` | Update todo      | `userRole`     |
-| DELETE | `/todos/:id` | Delete todo      | -              |
+### Backend Implementation
+- Uses in-memory array for todo storage
+- Implements permission-based feature gating
+- Colocated tests with source files
 
-### User Role Parameter
-
-Add `?userRole=paid` or `?userRole=free` to API requests:
-
-```bash
-# Example: Get todos as paid user
-GET http://localhost:3000/todos?userRole=paid
-```
+### Frontend Implementation
+- Vue 3 Composition API
+- TypeScript for type safety
+- Vite for development and building
+- Environment variables for API configuration
+- Colocated component tests
