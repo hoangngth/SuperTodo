@@ -17,6 +17,12 @@ describe('TodoService', () => {
     expect(service).toBeDefined();
   });
 
+  it('should have a default todo', () => {
+    const todos = service.findAll();
+    expect(todos.length).toBe(1);
+    expect(todos[0].title).toBe('Welcome to Super Todo!');
+  });
+
   describe('create', () => {
     it('should create a todo', () => {
       const createTodoDto = { title: 'Test Todo', notes: 'Test Notes' };
@@ -39,9 +45,10 @@ describe('TodoService', () => {
       
       const result = service.findAll();
       expect(Array.isArray(result)).toBe(true);
-      expect(result.length).toBe(2);
-      expect(result[0].title).toBe('Test Todo 1');
-      expect(result[1].title).toBe('Test Todo 2');
+      expect(result.length).toBe(3); //Including the default todo
+      expect(result[0].title).toBe('Welcome to Super Todo!');
+      expect(result[1].title).toBe('Test Todo 1');
+      expect(result[2].title).toBe('Test Todo 2');
     });
   });
 

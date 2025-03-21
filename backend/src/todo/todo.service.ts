@@ -5,7 +5,13 @@ import { TodoEntity } from './entities/todo.entity';
 
 @Injectable()
 export class TodoService {
-  private todos: TodoEntity[] = [];
+  private todos: TodoEntity[] = [{
+    id: '1',
+    title: 'Welcome to Super Todo!',
+    notes: 'Try adding your own todos. Upgrade to premium to add notes!',
+    isCompleted: false,
+    createdAt: new Date()
+  }];
 
   create(createTodoDto: CreateTodoDto): TodoEntity {
     const todo = new TodoEntity();

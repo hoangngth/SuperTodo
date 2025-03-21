@@ -1,76 +1,102 @@
 <template>
-  <div>
-    <div>
+  <div class="max-w-2xl mx-auto p-4">
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
       <!-- Create Todo Form -->
-      <div>
-        <form @submit.prevent="createTodo">
+      <div class="p-6 border-b border-gray-200">
+        <form @submit.prevent="createTodo" class="space-y-4">
           <div>
-            <label for="title">Title</label>
+            <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
             <input
               type="text"
               id="title"
               v-model="newTodo.title"
               required
+              class="p-2 block w-full rounded-md border-gray-300 shadow-sm"
+              placeholder="My title"
             />
           </div>
           <div v-if="userRole === 'paid'">
-            <label for="notes">Notes</label>
+            <label for="notes" class="block text-sm font-medium text-gray-700">Notes</label>
             <textarea
               id="notes"
               v-model="newTodo.notes"
               rows="3"
+              class="p-2 block w-full rounded-md border-gray-300 shadow-sm"
+              placeholder="Add notes (Premium feature)"
             ></textarea>
           </div>
-          <button type="submit">
-            Create Todo
-          </button>
+          <div class="text-right">
+            <button type="submit" 
+                    class="inline-flex justify-center py-2 px-4 border border-transparent 
+                           shadow-sm text-sm font-medium rounded-md text-white 
+                           bg-blue-600 hover:bg-blue-700
+                           focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+              Create Todo
+            </button>
+          </div>
         </form>
       </div>
 
       <!-- Todo List -->
-      <div>
+      <div class="divide-y divide-gray-200">
         <div
           v-for="todo in todos"
           :key="todo.id"
+          class="p-4 hover:bg-gray-50"
         >
-          <div>
-            <div>
-              Completed
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-3">
               <input
                 type="checkbox"
                 :checked="todo.isCompleted"
                 @change="toggleComplete(todo.id)"
+                class="h-4 w-4 rounded border-gray-300 text-blue-600 
+                       focus:ring-blue-500"
               />
               <span 
                 @click="toggleTodo(todo.id)"
-                :class="{ 'completed': todo.isCompleted }"
+                :class="[
+                  'text-sm cursor-pointer',
+                  todo.isCompleted ? 'line-through text-gray-400' : 'text-gray-900'
+                ]"
               >
                 {{ todo.title }}
               </span>
             </div>
-            <div>
-              <button @click="deleteTodo(todo.id)">
+            <div class="flex items-center space-x-2">
+              <button 
+                @click="deleteTodo(todo.id)"
+                class="text-red-600 hover:text-red-800"
+              >
                 Delete
               </button>
-              <button @click="toggleTodo(todo.id)">
+              <button 
+                @click="toggleTodo(todo.id)"
+                class="text-gray-400 hover:text-gray-600"
+              >
                 {{ expandedTodos[todo.id] ? '▼' : '▶' }}
               </button>
             </div>
           </div>
 
           <!-- Accordion Content -->
-          <div v-show="expandedTodos[todo.id]">
-            <div>
-              <div>
+          <div 
+            v-show="expandedTodos[todo.id]"
+            class="mt-4 pl-7"
+          >
+            <div class="space-y-4">
+              <div class="text-sm text-gray-500">
                 Created: {{ new Date(todo.createdAt).toLocaleDateString() }}
               </div>
               
-              <div v-if="userRole === 'paid'">
-                <label>Notes</label>
+              <div v-if="userRole === 'paid'" class="space-y-2">
+                <label class="block text-sm font-medium text-gray-700">Notes</label>
                 <textarea
                   v-model="todo.notes"
                   rows="3"
                   @change="updateNotes(todo.id, $event.target.value)"
+                  class="block w-full rounded-md border-gray-300 shadow-sm 
+                         focus:border-blue-500 focus:ring-blue-500 text-sm"
                 ></textarea>
               </div>
             </div>

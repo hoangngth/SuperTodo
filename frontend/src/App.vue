@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div class="bg-gray-100 container mx-auto my-10">
     <!-- Header -->
     <header>
       <div>
-        <h1>Super Todo</h1>
-        <p>
+        <h1 class="text-center text-3xl font-semibold mb-4">Super Todo</h1>
+        <p class="text-center mb-4">
           Current Plan: 
           <select v-model="userRole">
             <option value="free">Free</option>
